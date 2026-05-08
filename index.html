@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KTS Tech Store - Your Gateway to AI Tools & Automation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #0d0d15;
+            --bg-card: rgba(20, 20, 35, 0.6);
+            --bg-card-hover: rgba(25, 25, 45, 0.8);
+            --neon-blue: #00d4ff;
+            --neon-purple: #a855f7;
+            --neon-blue-glow: rgba(0, 212, 255, 0.3);
+            --neon-purple-glow: rgba(168, 85, 247, 0.3);
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0b0;
+            --text-muted: #6b6b7b;
+            --border-color: rgba(255, 255, 255, 0.08);
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .bg-animation::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 20% 80%, var(--neon-blue-glow) 0%, transparent 40%),
+                        radial-gradient(circle at 80% 20%, var(--neon-purple-glow) 0%, transparent 40%);
+            animation: bgPulse 15s ease-in-out infinite;
+        }
+
+        @keyframes bgPulse {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.1) rotate(5deg); }
+        }
+
+        /* Floating Orbs */
+        .orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: -1;
+            opacity: 0.4;
+        }
+
+        .orb-1 {
+            width: 400px;
+            height: 400px;
+            background: var(--neon-blue);
+            top: 10%;
+            left: -10%;
+            animation: floatOrb 20s ease-in-out infinite;
+        }
+
+        .orb-2 {
+            width: 300px;
+            height: 300px;
+            background: var(--neon-purple);
+            top: 60%;
+            right: -5%;
+            animation: floatOrb 25s ease-in-out infinite reverse;
+        }
+
+        .orb-3 {
+            width: 200px;
+            height: 200px;
+            background: var(--neon-blue);
+            bottom: 10%;
+            left: 30%;
+            animation: floatOrb 18s ease-in-out infinite;
+        }
+
+        @keyframes floatOrb {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(50px, -30px) scale(1.1); }
+            50% { transform: translate(-20px, 40px) scale(0.9); }
+            75% { transform: translate(30px, 20px) scale(1.05); }
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1rem 2rem;
+            background: rgba(10, 10, 15, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            padding: 0.7rem 2rem;
+            background: rgba(10, 10, 15, 0.95);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 42px;
+            height: 42px;
+            background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: white;
+            box-shadow: 0 0 20px var(--neon-blue-glow);
+        }
+
+        .logo-text {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 800;
+            font-size: 1.4rem;
+            background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .lang-switcher {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .lang-btn {
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--border-color);
+            background: var(--glass-bg);
+            color: var(--text-secondary);
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+        }
+
+        .lang-btn:hover {
+            border-color: var(--neon-blue);
+            color: var(--neon-blue);
+            background: rgba(0, 212, 255, 0.1);
+        }
+
+        .lang-btn.active {
+            background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 0 15px var(--neon-blue-glow);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8rem 2rem 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            text-align: center;
+            z-index: 1;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1.25rem;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 50px;
+            font-size: 0.875rem;
+            color: var(--neon-blue);
+            margin-bottom: 2rem;
+            backdrop-filter: blur(10px);
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .hero-badge i {
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .hero h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+
+        .hero h1 .gradient-text {
+            background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-description {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 2.5rem;
+            animation: fadeInUp 0.8s ease-out 0.4s both;
+        }
+
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem 2.5rem;
+            background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            box-shadow: 0 0 30px var(--neon-blue-glow);
+            transition: all 0.3s ease;
+            animation: fadeInUp 0.8s ease-out 0.6s both;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hero-cta:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 40px var(--neon-blue-glow), 0 0 60px var(--neon-purple-glow);
+        }
+
+        .hero-cta i {
+            transition: transform 0.3s ease;
+        }
+
+        .hero-cta:hover i {
+            transform: translateX(5px);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Scroll Indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-muted);
+            font-size: 0.875rem;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-10px); }
+        }
+
+        /* Section Styles */
+        section {
+            padding: 6rem 2rem;
+            position: relative;
+        }
+
+        .section-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-label {
+            display: inline-block;
+            padding: 0.4rem 1rem;
+            background: rgba(0, 212, 255, 0.1);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: 50px;
+            color: var(--neon-blue);
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .section-title .gradient-text {
+            background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-description {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Tools Grid */
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .tool-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        .tool-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(0, 212, 255, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 30px var(--neon-blue-glow);
+            background: var(--bg-card-hover);
+        }
+
+        .tool-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .tool-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.15), rgba(168, 85, 247, 0.15));
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1.25rem;
+            border: 1px solid rgba(0, 212, 255, 0.2);
+        }
+
+        .tool-card h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+
+        .tool-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        .tool-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .tool-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px var(--neon-blue-glow);
+        }
+
+        /* Generators Section */
+        .generators-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .generator-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 2.5rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .generator-card::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0, 212, 255, 0.05) 0%, transparent 70%);
+            animation: rotateGlow 10s linear infinite;
+        }
+
+        @keyframes rotateGlow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .generator-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(168, 85, 247, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .generator-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.2), rgba(0, 212, 255, 0.2));
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin: 0 auto 1.5rem;
+            border: 1px solid rgba(168, 85, 247, 0.3);
+            position: relative;
+            z-index: 1;
+        }
+
+        .generator-card h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .generator-card p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .generator-lock {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.875rem 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
+            color: var(--text-muted);
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            position: relative;
+            z-index: 1;
+            cursor: not-allowed;
+        }
+
+        .generator-lock i {
+            animation: lockPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes lockPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        /* Connect Section */
+        .connect-section {
+            text-align: center;
+        }
+
+        .social-grid {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .social-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            padding: 2rem 3rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            text-decoration: none;
+            color: var(--text-primary);
+            transition: all 0.4s ease;
+            min-width: 180px;
+            backdrop-filter: blur(10px);
+        }
+
+        .social-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--neon-blue);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3), 0 0 25px var(--neon-blue-glow);
+        }
+
+        .social-card i {
+            font-size: 2.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-card:hover i {
+            transform: scale(1.2);
+        }
+
+        .social-card.telegram:hover { border-color: #0088cc; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3), 0 0 25px rgba(0, 136, 204, 0.3); }
+        .social-card.telegram i { color: #0088cc; }
+
+        .social-card.instagram:hover { border-color: #e4405f; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3), 0 0 25px rgba(228, 64, 95, 0.3); }
+        .social-card.instagram i { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+        .social-card.github:hover { border-color: #ffffff; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3), 0 0 25px rgba(255, 255, 255, 0.2); }
+        .social-card.github i { color: #ffffff; }
+
+        .social-card span {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        /* Footer */
+        .footer {
+            padding: 3rem 2rem;
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+            background: rgba(10, 10, 15, 0.8);
+            backdrop-filter: blur(10px);
+        }
+
+        .footer p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .footer .logo-text {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            display: inline-block;
+        }
+
+        /* Reveal Animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 1rem;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .lang-switcher {
+                position: fixed;
+                top: 70px;
+                right: 1rem;
+                flex-direction: column;
+                background: var(--bg-secondary);
+                border: 1px solid var(--border-color);
+                border-radius: 12px;
+                padding: 0.5rem;
+                display: none;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            }
+
+            .lang-switcher.active {
+                display: flex;
+            }
+
+            .hero {
+                padding: 7rem 1.5rem 3rem;
+            }
+
+            section {
+                padding: 4rem 1.5rem;
+            }
+
+            .tools-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .generators-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .social-grid {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .social-card {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .tools-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* RTL Support */
+        [dir="rtl"] .hero-cta i,
+        [dir="rtl"] .tool-btn i {
+            transform: scaleX(-1);
+        }
+
+        [dir="rtl"] .hero-cta:hover i {
+            transform: scaleX(-1) translateX(-5px);
+        }
+
+        [dir="rtl"] .logo {
+            flex-direction: row-reverse;
+        }
+
+        [dir="rtl"] .nav-container {
+            flex-direction: row-reverse;
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Animation -->
+    <div class="bg-animation"></div>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <div class="logo-icon"><i class="fas fa-bolt"></i></div>
+                <span class="logo-text">KTS Tech Store</span>
+            </a>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="lang-switcher" id="langSwitcher">
+                <button class="lang-btn active" data-lang="en">EN</button>
+                <button class="lang-btn" data-lang="ar">AR</button>
+                <button class="lang-btn" data-lang="tr">TR</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <i class="fas fa-sparkles"></i>
+                <span data-i18n="heroBadge">Next-Gen AI Solutions</span>
+            </div>
+            <h1 data-i18n="heroTitle">
+                Your Gateway to <span class="gradient-text">AI Tools & Automation</span>
+            </h1>
+            <p class="hero-description" data-i18n="heroDesc">
+                Discover cutting-edge AI tools designed to transform your workflow, boost productivity, and unlock new creative possibilities.
+            </p>
+            <a href="#tools" class="hero-cta">
+                <span data-i18n="heroCta">Explore AI Tools</span>
+                <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+        <div class="scroll-indicator">
+            <span data-i18n="scrollDown">Scroll Down</span>
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <!-- AI Tools Showcase Section -->
+    <section id="tools">
+        <div class="section-container">
+            <div class="section-header reveal">
+                <span class="section-label" data-i18n="toolsLabel">AI Tools Collection</span>
+                <h2 class="section-title" data-i18n="toolsTitle">
+                    Powerful <span class="gradient-text">AI Tools</span> at Your Fingertips
+                </h2>
+                <p class="section-description" data-i18n="toolsDesc">
+                    Explore our curated collection of innovative AI-powered applications built to supercharge your digital experience.
+                </p>
+            </div>
+            <div class="tools-grid" id="toolsGrid">
+                <!-- Tools will be injected by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Smart Generators Section -->
+    <section id="generators">
+        <div class="section-container">
+            <div class="section-header reveal">
+                <span class="section-label" data-i18n="genLabel">Coming Soon</span>
+                <h2 class="section-title" data-i18n="genTitle">
+                    <span class="gradient-text">🧠 AI Content Generators</span> (Coming Soon)
+                </h2>
+                <p class="section-description" data-i18n="genDesc">
+                    Advanced AI-powered content generators are under development. Stay tuned for powerful text, code, image, and video generation tools.
+                </p>
+            </div>
+            <div class="generators-grid" id="generatorsGrid">
+                <!-- Generators will be injected by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Connect Section -->
+    <section id="connect" class="connect-section">
+        <div class="section-container">
+            <div class="section-header reveal">
+                <span class="section-label" data-i18n="connectLabel">Get In Touch</span>
+                <h2 class="section-title" data-i18n="connectTitle">
+                    Connect <span class="gradient-text">With Me</span>
+                </h2>
+                <p class="section-description" data-i18n="connectDesc">
+                    Follow me on social media for the latest updates, releases, and behind-the-scenes content.
+                </p>
+            </div>
+            <div class="social-grid reveal">
+                <a href="https://t.me/KTS_Tech_Store" target="_blank" rel="noopener noreferrer" class="social-card telegram">
+                    <i class="fab fa-telegram"></i>
+                    <span>Telegram</span>
+                </a>
+                <a href="https://www.instagram.com/ktsion.os" target="_blank" rel="noopener noreferrer" class="social-card instagram">
+                    <i class="fab fa-instagram"></i>
+                    <span>Instagram</span>
+                </a>
+                <a href="https://github.com/khalodaaa200-ui" target="_blank" rel="noopener noreferrer" class="social-card github">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p><span class="logo-text">KTS Tech Store</span></p>
+        <p data-i18n="footerText">&copy; 2026 KTS Tech Store – All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Translations
+        const translations = {
+            en: {
+                heroBadge: "Next-Gen AI Solutions",
+                heroTitle: "Your Gateway to <span class='gradient-text'>AI Tools & Automation</span>",
+                heroDesc: "Discover cutting-edge AI tools designed to transform your workflow, boost productivity, and unlock new creative possibilities.",
+                heroCta: "Explore AI Tools",
+                scrollDown: "Scroll Down",
+                toolsLabel: "AI Tools Collection",
+                toolsTitle: "Powerful <span class='gradient-text'>AI Tools</span> at Your Fingertips",
+                toolsDesc: "Explore our curated collection of innovative AI-powered applications built to supercharge your digital experience.",
+                genLabel: "Coming Soon",
+                genTitle: "<span class='gradient-text'>🧠 AI Content Generators</span> (Coming Soon)",
+                genDesc: "Advanced AI-powered content generators are under development. Stay tuned for powerful text, code, image, and video generation tools.",
+                connectLabel: "Get In Touch",
+                connectTitle: "Connect <span class='gradient-text'>With Me</span>",
+                connectDesc: "Follow me on social media for the latest updates, releases, and behind-the-scenes content.",
+                footerText: "&copy; 2026 KTS Tech Store – All rights reserved.",
+                downloadBtn: "Download",
+                unlockBtn: "🔒 Unlock Soon",
+                tools: [
+                    { name: "TextMorph AI", desc: "Transform and enhance your text with advanced natural language processing. Rewrite, summarize, and generate content effortlessly.", icon: "fa-font" },
+                    { name: "VisualForge", desc: "Create stunning visuals and graphics using AI-powered image generation. Turn your ideas into breathtaking artwork in seconds.", icon: "fa-image" },
+                    { name: "PromptCraft", desc: "Master the art of prompt engineering with intelligent suggestions and optimizations for any AI model.", icon: "fa-wand-magic-sparkles" },
+                    { name: "CodeWhisper", desc: "Your intelligent coding companion. Auto-complete, debug, and refactor code with AI-powered suggestions across all languages.", icon: "fa-code" },
+                    { name: "DesignPilot", desc: "Streamline your design workflow with AI-assisted UI/UX creation, color palettes, and layout suggestions.", icon: "fa-palette" },
+                    { name: "DataMind", desc: "Unlock insights from your data with powerful AI analytics. Visualize trends, predict outcomes, and make data-driven decisions.", icon: "fa-chart-line" },
+                    { name: "VoiceCloner", desc: "Clone and synthesize voices with incredible accuracy. Perfect for content creation, accessibility, and entertainment.", icon: "fa-microphone" },
+                    { name: "LearnSphere", desc: "Personalized AI tutoring that adapts to your learning style. Master any subject with intelligent study plans and quizzes.", icon: "fa-graduation-cap" },
+                    { name: "HealthSync", desc: "AI-powered health monitoring and recommendations. Track vitals, analyze patterns, and get personalized wellness advice.", icon: "fa-heart-pulse" },
+                    { name: "MarketGuru", desc: "AI-driven market analysis and trading insights. Stay ahead of trends with real-time predictions and portfolio optimization.", icon: "fa-arrow-trend-up" }
+                ],
+                generators: [
+                    { name: "AI Article Writer", desc: "Generate high-quality articles, blog posts, and essays on any topic with advanced language models.", icon: "fa-pen-nib" },
+                    { name: "AI Code Generator", desc: "Write, debug, and optimize code in any programming language with intelligent AI assistance.", icon: "fa-terminal" },
+                    { name: "AI Image Creator", desc: "Create stunning images, illustrations, and artwork from text descriptions using cutting-edge diffusion models.", icon: "fa-camera" }
+                ]
+            },
+            ar: {
+                heroBadge: "حلول الذكاء الاصطناعي المتقدمة",
+                heroTitle: "بوابتك إلى <span class='gradient-text'>أدوات الذكاء الاصطناعي والأتمتة</span>",
+                heroDesc: "اكتشف أدوات الذكاء الاصطناعي المتطورة المصممة لتحويل سير عملك، وتعزيز الإنتاجية، وإطلاق إمكانات إبداعية جديدة.",
+                heroCta: "استكشف أدوات الذكاء الاصطناعي",
+                scrollDown: "اسحب للأسفل",
+                toolsLabel: "مجموعة أدوات الذكاء الاصطناعي",
+                toolsTitle: "أدوات <span class='gradient-text'>الذكاء الاصطناعي</span> القوية بين يديك",
+                toolsDesc: "استكشف مجموعتنا المختارة من تطبيقات الذكاء الاصطناعي المبتكرة المصممة لتعزيز تجربتك الرقمية.",
+                genLabel: "قريباً",
+                genTitle: "<span class='gradient-text'>🧠 مولدات المحتوى بالذكاء الاصطناعي</span> (قريباً)",
+                genDesc: "مولدات المحتوى المتقدمة بالذكاء الاصطناعي قيد التطوير. ترقبوا أدوات قوية لإنشاء النصوص والأكواد والصور ومقاطع الفيديو.",
+                connectLabel: "تواصل معي",
+                connectTitle: "تواصل <span class='gradient-text'>معي</span>",
+                connectDesc: "تابعني على وسائل التواصل الاجتماعي للحصول على آخر التحديثات والإصدارات والمحتوى الحصري.",
+                footerText: "&copy; 2026 متجر KTS التقني – جميع الحقوق محفوظة.",
+                downloadBtn: "تحميل",
+                unlockBtn: "🔒 قريباً",
+                tools: [
+                    { name: "TextMorph AI", desc: "حوّل وحسّن نصوصك باستخدام معالجة اللغات الطبيعية المتقدمة. أعد الكتابة والتلخيص وإنشاء المحتوى بسهولة.", icon: "fa-font" },
+                    { name: "VisualForge", desc: "أنشئ صورًا ورسومات مذهلة باستخدام توليد الصور بالذكاء الاصطناعي. حوّل أفكارك إلى أعمال فنية خلابة في ثوانٍ.", icon: "fa-image" },
+                    { name: "PromptCraft", desc: "أتقن فن هندسة الأوامر مع اقتراحات وتحسينات ذكية لأي نموذج ذكاء اصطناعي.", icon: "fa-wand-magic-sparkles" },
+                    { name: "CodeWhisper", desc: "رفيقك البرمجي الذكي. أكمل تلقائيًا، وصحح الأخطاء، وأعد بناء الأكواد باقتراحات مدعومة بالذكاء الاصطناعي.", icon: "fa-code" },
+                    { name: "DesignPilot", desc: "بسّط سير عمل التصميم مع إنشاء واجهات المستخدم المدعوم بالذكاء الاصطناعي، ولوحات الألوان، واقتراحات التخطيط.", icon: "fa-palette" },
+                    { name: "DataMind", desc: "اكتشف رؤى من بياناتك باستخدام التحليلات الذكية. تصور الاتجاهات، وتنبأ بالنتائج، واتخذ قرارات مبنية على البيانات.", icon: "fa-chart-line" },
+                    { name: "VoiceCloner", desc: "استنسخ وولّد الأصوات بدقة مذهلة. مثالي لإنشاء المحتوى، وإمكانية الوصول، والترفيه.", icon: "fa-microphone" },
+                    { name: "LearnSphere", desc: "تدريس ذكي شخصي يتكيف مع أسلوب تعلمك. أتقن أي موضوع مع خطط دراسية ذكية واختبارات.", icon: "fa-graduation-cap" },
+                    { name: "HealthSync", desc: "مراقبة صحية مدعومة بالذكاء الاصطناعي وتوصيات شخصية. تتبع العلامات الحيوية، وحلل الأنماط، واحصل على نصائح صحية.", icon: "fa-heart-pulse" },
+                    { name: "MarketGuru", desc: "تحليل السوق المدعوم بالذكاء الاصطناعي ورؤى التداول.ابقَ متقدمًا على الاتجاهات مع التنبؤات الفورية وتحسين المحفظة.", icon: "fa-arrow-trend-up" }
+                ],
+                generators: [
+                    { name: "كاتب المقالات بالذكاء الاصطناعي", desc: "أنشئ مقالات ومنشورات مدونة ورسائل عالية الجودة حول أي موضوع باستخدام نماذج اللغة المتقدمة.", icon: "fa-pen-nib" },
+                    { name: "مولد الأكواد بالذكاء الاصطناعي", desc: "اكتب، وصحح الأخطاء، وحسّن الأكواد بأي لغة برمجة بمساعدة ذكاء اصطناعي ذكي.", icon: "fa-terminal" },
+                    { name: "منشئ الصور بالذكاء الاصطناعي", desc: "أنشئ صورًا ورسومات وأعمال فنية مذهلة من أوصاف نصية باستخدام نماذج الانتشار المتطورة.", icon: "fa-camera" }
+                ]
+            },
+            tr: {
+                heroBadge: "Yeni Nesil AI Çözümleri",
+                heroTitle: "<span class='gradient-text'>AI Araçları ve Otomasyon</span> için Kapınız",
+                heroDesc: "İş akışınızı dönüştürmek, verimliliği artırmak ve yeni yaratıcı olasılıkların kilidini açmak için tasarlanmış en son AI araçlarını keşfedin.",
+                heroCta: "AI Araçlarını Keşfet",
+                scrollDown: "Aşağı Kaydır",
+                toolsLabel: "AI Araçları Koleksiyonu",
+                toolsTitle: "Parmaklarınızın Ucunda Güçlü <span class='gradient-text'>AI Araçları</span>",
+                toolsDesc: "Dijital deneyiminizi güçlendirmek için tasarlanmış yenilikçi AI destekli uygulamaların özenle seçilmiş koleksiyonunu keşfedin.",
+                genLabel: "Yakında",
+                genTitle: "<span class='gradient-text'>🧠 AI İçerik Oluşturucular</span> (Yakında)",
+                genDesc: "Gelişmiş AI destekli içerik oluşturucular geliştirme aşamasında. Güçlü metin, kod, görsel ve video oluşturma araçları için bizi takip edin.",
+                connectLabel: "İletişime Geç",
+                connectTitle: "Benimle <span class='gradient-text'>Bağlantı Kur</span>",
+                connectDesc: "En son güncellemeler, sürümler ve sahne arkası içerikler için beni sosyal medyada takip edin.",
+                footerText: "&copy; 2026 KTS Tech Store – Tüm hakları saklıdır.",
+                downloadBtn: "İndir",
+                unlockBtn: "🔒 Yakında",
+                tools: [
+                    { name: "TextMorph AI", desc: "Gelişmiş doğal dil işleme ile metinlerinizi dönüştürün ve geliştirin. Kolayca yeniden yazın, özetleyin ve içerik oluşturun.", icon: "fa-font" },
+                    { name: "VisualForge", desc: "AI destekli görsel oluşturma ile çarpıcı görseller ve grafikler oluşturun. Fikirlerinizi saniyeler içinde nefes kesen sanat eserlerine dönüştürün.", icon: "fa-image" },
+                    { name: "PromptCraft", desc: "Akıllı öneriler ve optimizasyonlarla herhangi bir AI modeli için komut mühendisliği sanatında ustalaşın.", icon: "fa-wand-magic-sparkles" },
+                    { name: "CodeWhisper", desc: "Akıllı kodlama arkadaşınız. Tüm dillerde AI destekli önerilerle otomatik tamamlama, hata ayıklama ve kod yeniden düzenleme.", icon: "fa-code" },
+                    { name: "DesignPilot", desc: "AI destekli UI/UX oluşturma, renk paletleri ve düzen önerileri ile tasarım iş akışınızı kolaylaştırın.", icon: "fa-palette" },
+                    { name: "DataMind", desc: "Güçlü AI analitiği ile verilerinizden içgörüler elde edin. Eğilimleri görselleştirin, sonuçları tahmin edin ve veri odaklı kararlar alın.", icon: "fa-chart-line" },
+                    { name: "VoiceCloner", desc: "İnanılmaz doğrulukla sesleri klonlayın ve sentezleyin. İçerik oluşturma, erişilebilirlik ve eğlence için mükemmel.", icon: "fa-microphone" },
+                    { name: "LearnSphere", desc: "Öğrenme stilinize uyum sağlayan kişiselleştirilmiş AI öğretimi. Akıllı çalışma planları ve quizlerle herhangi bir konuda ustalaşın.", icon: "fa-graduation-cap" },
+                    { name: "HealthSync", desc: "AI destekli sağlık izleme ve öneriler. Hayati belirtileri takip edin, kalıpları analiz edin ve kişiselleştirilmiş sağlık önerileri alın.", icon: "fa-heart-pulse" },
+                    { name: "MarketGuru", desc: "AI destekli piyasa analizi ve ticaret içgörüleri. Gerçek zamanlı tahminler ve portföy optimizasyonuyla trendlerin önünde olun.", icon: "fa-arrow-trend-up" }
+                ],
+                generators: [
+                    { name: "AI Makale Yazarı", desc: "Gelişmiş dil modelleriyle herhangi bir konuda yüksek kaliteli makaleler, blog yazıları ve denemeler oluşturun.", icon: "fa-pen-nib" },
+                    { name: "AI Kod Oluşturucu", desc: "Akıllı AI yardımıyla herhangi bir programlama dilinde kod yazın, hata ayıklayın ve optimize edin.", icon: "fa-terminal" },
+                    { name: "AI Görsel Oluşturucu", desc: "En son difüzyon modellerini kullanarak metin açıklamalarından çarpıcı görseller, çizimler ve sanat eserleri oluşturun.", icon: "fa-camera" }
+                ]
+            }
+        };
+
+        let currentLang = 'en';
+
+        // Render Tools
+        function renderTools() {
+            const toolsGrid = document.getElementById('toolsGrid');
+            const tools = translations[currentLang].tools;
+            const downloadBtn = translations[currentLang].downloadBtn;
+
+            toolsGrid.innerHTML = tools.map((tool, index) => `
+                <div class="tool-card reveal" style="transition-delay: ${index * 0.1}s">
+                    <div class="tool-icon"><i class="fas ${tool.icon}"></i></div>
+                    <h3>${tool.name}</h3>
+                    <p>${tool.desc}</p>
+                    <a href="https://play.google.com/store/apps/details?id=COMING_SOON" target="_blank" rel="noopener noreferrer" class="tool-btn">
+                        <span>${downloadBtn}</span>
+                        <i class="fas fa-external-link-alt"></i>
+                    </a>
+                </div>
+            `).join('');
+        }
+
+        // Render Generators
+        function renderGenerators() {
+            const generatorsGrid = document.getElementById('generatorsGrid');
+            const generators = translations[currentLang].generators;
+            const unlockBtn = translations[currentLang].unlockBtn;
+
+            generatorsGrid.innerHTML = generators.map((gen, index) => `
+                <div class="generator-card reveal" style="transition-delay: ${index * 0.15}s">
+                    <div class="generator-icon"><i class="fas ${gen.icon}"></i></div>
+                    <h3>${gen.name}</h3>
+                    <p>${gen.desc}</p>
+                    <div class="generator-lock">
+                        <i class="fas fa-lock"></i>
+                        <span>${unlockBtn}</span>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Update Content
+        function updateContent() {
+            const t = translations[currentLang];
+
+            // Update text content
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (t[key]) {
+                    el.innerHTML = t[key];
+                }
+            });
+
+            // Update HTML direction
+            document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+            document.documentElement.lang = currentLang === 'ar' ? 'ar' : (currentLang === 'tr' ? 'tr' : 'en');
+
+            // Update active button
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.lang === currentLang);
+            });
+
+            // Re-render dynamic sections
+            renderTools();
+            renderGenerators();
+
+            // Re-observe new elements
+            setTimeout(() => {
+                document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+            }, 100);
+        }
+
+        // Language Switcher
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                currentLang = btn.dataset.lang;
+                updateContent();
+            });
+        });
+
+        // Mobile Menu
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const langSwitcher = document.getElementById('langSwitcher');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            langSwitcher.classList.toggle('active');
+        });
+
+        // Navbar Scroll Effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Scroll Reveal
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            updateContent();
+            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        });
+
+        // Close mobile menu on outside click
+        document.addEventListener('click', (e) => {
+            if (!mobileMenuBtn.contains(e.target) && !langSwitcher.contains(e.target)) {
+                langSwitcher.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>
